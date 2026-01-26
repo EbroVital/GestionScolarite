@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paiements', function (Blueprint $table) {
+        Schema::create('recus', function (Blueprint $table) {
             $table->id();
             $table->decimal('montant', 10, 2);
-            $table->date('date_paiement');
-            $table->text('observation')->nullable();
-            $table->string('reference_transaction')->nullable();
-            $table->foreignId('type_paiement_id')->constrained('type_paiements')->onUpdate('cascade');
-            $table->foreignId('eleve_id')->constrained('eleves')->onUpdate('cascade');
+            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('cascade');
+            $table->date('date_emission');
+            $table->string('numero_recu')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('recus');
     }
 };
