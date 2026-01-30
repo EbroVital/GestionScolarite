@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class fraisScolaire extends Model
 {
     use HasFactory;
-    public function classe(){
+
+    protected $fillable = [
+        'niveau',
+        'montant'
+    ];
+    public function classes(){
         return $this->hasMany(Classe::class);
     }
 

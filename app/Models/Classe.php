@@ -9,6 +9,14 @@ class Classe extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'nom',
+        'niveau',
+        'annee_scolaire_id',
+        'frais_scolaire_id'
+    ];
+
     // une classe concerne une année scolaire
     public function anneeScolaire(){
         return $this->belongsTo(anneeScolaire::class);

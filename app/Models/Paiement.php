@@ -9,6 +9,17 @@ class Paiement extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'montant',
+        'date_paiement',
+        'observation',
+        'reference_transaction',
+        'type_paiement_id',
+        'eleve_id',
+        
+    ];
+
     // un paiement concerne un seul eleve
     public function eleve(){
         return $this->belongsTo(Eleve::class);

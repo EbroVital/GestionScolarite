@@ -9,6 +9,11 @@ class TypePaiement extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'libelle'
+    ];
+
     // un type de paiement a plusieurs paiements
 
     public function paiements(){

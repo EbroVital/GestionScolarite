@@ -9,6 +9,11 @@ class anneeScolaire extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'libelle'
+    ];
+
+
     // une année scolaire a plusieurs classes
     public function classes(){
         return $this->hasMany(Classe::class);

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -60,5 +61,9 @@ class User extends Authenticatable
         return $this->role === "eleve";
     }
 
+    // scope
+    public function scopeRole($query, $role){
+        return $query->where('role', $role);
+    }
 
 }

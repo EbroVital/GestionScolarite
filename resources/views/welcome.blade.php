@@ -45,21 +45,18 @@
                     <ul class="navbar-nav ms-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{-- route('dashboard') --}}
+                                <a class="nav-link" href="{{route('dashboard')}}">
                                     <i class="bi bi-speedometer2"></i> Dashboard
                                 </a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{-- route('login') --}}
+                                <a class="nav-link" href="{{route('login')}}">
                                     <i class="bi bi-box-arrow-in-right"></i> Se connecter
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{-- route('register') --}}
+                                <a class="nav-link" href="{{route('register')}}">
                                     <i class="bi bi-person-plus"></i> S'inscrire
                                 </a>
                             </li>
@@ -78,16 +75,15 @@
                         <p class="lead mb-4">Une solution complète pour gérer les paiements, les élèves et suivre les frais de scolarité en temps réel.</p>
                         <div class="d-flex gap-3">
                             @auth
-                                <a href="" class="btn btn-light btn-custom">
-                                    {{-- route('dashboard') --}}
+                                <a href="{{route('dashboard') }}" class="btn btn-light btn-custom">
                                     <i class="bi bi-speedometer2"></i> Accéder au Dashboard
                                 </a>
                             @else
-                                <a href="" class="btn btn-light btn-custom">
-                                    {{-- route('login') --}}
+                                <a href="{{route('login')}}" class="btn btn-light btn-custom">
+
                                     <i class="bi bi-box-arrow-in-right"></i> Se connecter
                                 </a>
-                                <a href="" class="btn btn-outline-light btn-custom"> {{-- route('register') --}}
+                                <a href="{{route('register')}}" class="btn btn-outline-light btn-custom">
                                     <i class="bi bi-person-plus"></i> S'inscrire
                                 </a>
                             @endauth
