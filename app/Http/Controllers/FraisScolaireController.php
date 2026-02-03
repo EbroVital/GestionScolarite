@@ -99,7 +99,7 @@ class FraisScolaireController extends Controller
         $frais->delete();
 
         return redirect()->route('frais-scolaire.index')
-            ->with('success', "Les frais du niveau '{$niveau}' ont été supprimés avec succès");
+            ->with('message', "Les frais du niveau '{$niveau}' ont été supprimés avec succès");
     }
 
 }
