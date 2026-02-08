@@ -5,6 +5,7 @@ use App\Http\Controllers\EleveController;
 use App\Http\Controllers\FraisScolaireController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\recuController;
 use App\Http\Controllers\TypePaiementController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function(){
         Route::resource('eleves', EleveController::class);
         Route::resource('paiements', PaiementController::class);
         Route::get('/paiements/eleves/{classe}', [PaiementController::class, 'getEleves'])->name('paiements.eleves');
+        Route::get('/reçu/{id}', [recuController::class, 'show'])->name('recus.show');
     });
 
     Route::middleware(['role:admin'])->group(function () {

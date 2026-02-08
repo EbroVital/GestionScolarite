@@ -13,26 +13,51 @@ class EleveController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request)
+    // {
+
+    //     $query = Eleve::with('classe');
+
+    //     if ($request->filled('classe_id')) {
+
+    //         $search = $request->search;
+
+    //         $query->where(function($q) use ($search){
+    //             $q->where('nom', 'like', "%{$search}%")->orWhere('prenom', 'like', "%{$search}%")->orWhere('matricule', 'like', "%{$search}%");
+    //         });
+
+    //         $eleves = $query->paginate(10);
+    //         $classes = Classe::all();
+
+    //         return view('eleves.index', compact('eleves', 'classes'));
+
+    //     }
+
+    // }
+
     public function index(Request $request)
     {
-
         $query = Eleve::with('classe');
 
+        // Filtre par classe
         if ($request->filled('classe_id')) {
-
-            $search = $request->search;
-
-            $query->where(function($q) use ($search){
-                $q->where('nom', 'like', "%{$search}%")->orWhere('prenom', 'like', "%{$search}%")->orWhere('matricule', 'like', "%{$search}%");
-            });
-
-            $eleves = $query->paginate(10);
-            $classes = Classe::all();
-
-            return view('eleves.index', compact('eleves', 'classes'));
-
+            $query->where('classe_id', $request->classe_id);
         }
 
+        // Filtre par recherche
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nom', 'like', "%{$search}%")
+                ->orWhere('prenom', 'like', "%{$search}%")
+                ->orWhere('matricule', 'like', "%{$search}%");
+            });
+        }
+
+        $eleves = $query->paginate(10);
+        $classes = Classe::all();
+
+        return view('eleves.index', compact('eleves', 'classes'));
     }
 
     /**

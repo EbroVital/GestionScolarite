@@ -114,8 +114,7 @@ class PaiementController extends Controller
             'date_emission' => now(),
         ]);
 
-        return redirect()->route('recus.show', $recu->id)
-            ->with('message', 'Paiement enregistré avec succès !');
+        return redirect()->route('recus.show', $recu->id)->with('message', 'Paiement enregistré avec succès !');
     }
 
     /**

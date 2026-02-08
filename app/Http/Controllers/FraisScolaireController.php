@@ -91,8 +91,7 @@ class FraisScolaireController extends Controller
         $count = $frais->classes()->count();
 
         if ($count > 0) {
-            return redirect()->route('frais-scolaire.index')
-                ->with('error', "Impossible de supprimer ce frais car il est utilisé par {$count} classe(s)");
+            return redirect()->route('frais-scolaire.index')->with('message', "Impossible de supprimer ce frais car il est utilisé par {$count} classe(s)");
         }
 
         $niveau = $frais->niveau;

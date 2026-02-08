@@ -35,4 +35,12 @@ class Eleve extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getNomCompletAttribute() {
+        return '{$this->nom} {$this->prenom}';
+    }
+
+    protected $casts = [
+        'date_naissance' => 'date',
+    ];
+
 }
