@@ -18,9 +18,11 @@ class PaiementController extends Controller
      */
     public function index()
     {
-        $paiements = Paiement::with('eleves', 'typePaiement', 'recu')->get();
+        $paiements = Paiement::with(['eleve.classe', 'typePaiement', 'recu'])->orderBy('date_paiement', 'desc')->get();
         $total = Paiement::sum('montant');
+
         return view('paiements.index', compact('paiements', 'total'));
+
     }
 
     /**
@@ -67,9 +69,7 @@ class PaiementController extends Controller
     // rechercher les eleves
     public function getEleves($classeId)
     {
-        $eleves = Eleve::where('classe_id', $classeId)
-            ->select('id', 'nom', 'prenom', 'matricule')
-            ->get();
+        $eleves = Eleve::where('classe_id', $classeId)->select('id', 'nom', 'prenom', 'matricule')->get();
 
         return response()->json($eleves);
     }

@@ -14,7 +14,7 @@ class TypePaiementController extends Controller
     public function index()
     {
        $typePaiements = TypePaiement::withCount('paiements')->get();
-        return view('type-frais.index', compact('TypePaiements'));
+        return view('type-frais.index', compact('typePaiements'));
     }
 
     /**

@@ -3,6 +3,12 @@
 use App\Models\Eleve;
 use App\Models\Recu;
 
+        function formater_montant($montant)
+        {
+            return number_format($montant, 0, ',', ' ') . ' FCFA';
+        }
+
+
     function annee_scolaire_actuelle()
     {
         $mois = now()->month; // Mois actuel

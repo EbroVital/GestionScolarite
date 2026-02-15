@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="utf-8">
@@ -14,6 +14,9 @@
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/ruang-admin.min.css')}}" rel="stylesheet">
+
+  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
 </head>
 
 <body id="page-top">
@@ -30,14 +33,14 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
 
-            @yield('content')
-
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"> @yield('h1') </h1>
 
           </div>
 
-          <div class="row mb-3">
+          @yield('content')
+
+          {{-- <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
@@ -323,32 +326,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
           <!--Row-->
 
 
 
           <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Êtes vous sûr de quitter l'application ?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal"> Annuler </button>
-                  <a href="{{route('logout')}}" class="btn btn-primary">Se déconnecter</a>
-                </div>
-              </div>
-            </div>
-          </div>
+
 
         </div>
         <!---Container Fluid-->

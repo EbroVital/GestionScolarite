@@ -29,11 +29,11 @@
                         {{-- Filtre par classe --}}
                         <div class="col-md-4">
                             <label for="classe_id" class="form-label">Classe</label>
-                            <select name="classe_id" id="classe_id" class="form-select">
+                            <select name="classe_id" id="classe_id" class="form-control">
                                 <option value="">Toutes les classes</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>
-                                        {{ $classe->nom }}
+                                        {{ $classe->niveau }}
                                     </option>
                                 @endforeach
                             </select>
@@ -53,7 +53,7 @@
                         {{-- Boutons --}}
                         <div class="col-md-3 d-flex align-items-end gap-2">
                             <button type="submit" class="btn btn-primary flex-fill">
-                                <i class="fas fa-search me-1"></i>Rechercher
+                                {{-- <i class="fas fa-search me-1"></i> --}}Rechercher
                             </button>
                             <a href="{{ route('eleves.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-redo"></i>

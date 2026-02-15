@@ -6,24 +6,20 @@
     <div class="container py-4">
         {{-- En-tête --}}
         <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('eleves.index') }}" class="btn btn-outline-secondary me-3">
-                <i class="fas fa-arrow-left"></i>
-            </a>
             <h1 class="h2 mb-0">Ajouter un élève</h1>
         </div>
 
         {{-- Formulaire --}}
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-sm">
+        <div class="row">
+            <div class="card shadow-sm">
                     <div class="card-body">
                         <form action="{{ route('eleves.store') }}" method="POST">
                             @csrf
 
                             {{-- Informations personnelles --}}
                             <div class="mb-4">
-                                <h5 class="border-bottom pb-2 mb-3">
-                                    <i class="fas fa-user me-2 text-primary"></i>Informations personnelles
+                                <h5 class="border-bottom text-center pb-2 mb-3">
+                                    <i class="fas fa-user me-2 text-primary"></i>   Informations personnelles
                                 </h5>
 
                                 <div class="row g-3">
@@ -82,7 +78,7 @@
                                         </label>
                                         <select name="sexe"
                                                 id="sexe"
-                                                class="form-select @error('sexe') is-invalid @enderror"
+                                                class="form-control @error('sexe') is-invalid @enderror"
                                                 required>
                                             <option value="">-- Sélectionner --</option>
                                             <option value="M" {{ old('sexe') == 'M' ? 'selected' : '' }}>Masculin</option>
@@ -97,8 +93,8 @@
 
                             {{-- Informations scolaires --}}
                             <div class="mb-4">
-                                <h5 class="border-bottom pb-2 mb-3">
-                                    <i class="fas fa-graduation-cap me-2 text-primary"></i>Informations scolaires
+                                <h5 class="border-bottom text-center pb-2 mb-3">
+                                    <i class="fas fa-graduation-cap me-2 text-primary"></i>   Informations scolaires
                                 </h5>
 
                                 <div class="row g-3">
@@ -109,12 +105,12 @@
                                         </label>
                                         <select name="classe_id"
                                                 id="classe_id"
-                                                class="form-select @error('classe_id') is-invalid @enderror"
+                                                class="form-control @error('classe_id') is-invalid @enderror"
                                                 required>
                                             <option value="">-- Sélectionner une classe --</option>
                                             @foreach($classes as $classe)
                                                 <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
-                                                    {{ $classe->nom }}
+                                                    {{ $classe->niveau }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -127,8 +123,8 @@
 
                             {{-- Informations de contact --}}
                             <div class="mb-4">
-                                <h5 class="border-bottom pb-2 mb-3">
-                                    <i class="fas fa-address-book me-2 text-primary"></i>Informations de contact
+                                <h5 class="border-bottom text-center pb-2 mb-3">
+                                    <i class="fas fa-address-book me-2 text-primary"></i>  Informations de contact
                                 </h5>
 
                                 <div class="row g-3">
@@ -169,25 +165,25 @@
 
                             {{-- Note sur le matricule --}}
                             <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
-                                <i class="fas fa-info-circle me-2"></i>
+                                <i class="fas fa-info-circle me-2"></i> &nbsp;
                                 <div>
-                                    <strong>Note :</strong> Le matricule sera généré automatiquement lors de l'enregistrement.
+                                    <strong> Note :</strong> Le matricule sera généré automatiquement lors de l'enregistrement.
                                 </div>
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-end gap-2">
+                            <div class="d-flex">
                                 <a href="{{ route('eleves.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                    <i class="fas fa-times me-1"></i> Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer
+                                    <i class="fas fa-save me-1"></i> Enregistrer
                                 </button>
                             </div>
                         </form>
                     </div>
-                </div>
             </div>
+
         </div>
     </div>
 @endsection
