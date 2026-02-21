@@ -27,7 +27,7 @@ class EleveRequest extends FormRequest
             'date_naissance' => 'required|date',
             'sexe' => 'required|in:M,F',
             'adresse' => 'nullable|string',
-            'classe_id' => 'required|exists:classes, id',
+            'classe_id' => 'required|exists:classes,id',
             'telephone_parent' => 'required|string|max:20',
             'user_id'=> 'nullable'
         ];

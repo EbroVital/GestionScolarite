@@ -16,7 +16,7 @@
                     <p class="text-muted mb-0">{{ formater_montant($frais->montant) }}</p>
                 </div>
             </div>
-            <div class="d-flex gap-2">
+            {{-- <div class="d-flex gap-2">
                 <a href="{{ route('frais-scolaire.edit', $frais) }}" class="btn btn-warning">
                     <i class="fas fa-edit me-1"></i>Modifier
                 </a>
@@ -25,7 +25,7 @@
                         <i class="fas fa-trash me-1"></i>Supprimer
                     </button>
                 @endif
-            </div>
+            </div> --}}
         </div>
 
         <div class="row g-4">
@@ -71,7 +71,7 @@
                                                     {{ formater_montant($revenuAttendu) }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('classes.show', $classe) }}"
+                                                    <a href="{{ route('classe.show', $classe) }}"
                                                     class="btn btn-sm btn-primary">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
@@ -102,7 +102,7 @@
                             <div class="text-center py-5">
                                 <i class="fas fa-school-slash fa-3x text-muted mb-3"></i>
                                 <p class="text-muted mb-3">Aucune classe n'utilise ces frais</p>
-                                <a href="{{ route('classes.create') }}" class="btn btn-primary">
+                                <a href="{{ route('classe.create') }}" class="btn btn-primary">
                                     <i class="fas fa-plus me-1"></i>Créer une classe
                                 </a>
                             </div>
@@ -206,7 +206,7 @@
         @method('DELETE')
     </form>
 
-    @push('scripts')
+
         <script>
         function confirmDelete(id, niveau) {
             if (confirm(`Êtes-vous sûr de vouloir supprimer les frais du niveau "${niveau}" ?\nCette action est irréversible.`)) {
@@ -216,5 +216,5 @@
             }
         }
         </script>
-    @endpush
+    
 @endsection

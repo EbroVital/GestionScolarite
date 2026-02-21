@@ -81,6 +81,8 @@ class EleveController extends Controller
         $info = $request->validated();
         $info['matricule'] = genererMatricule();
 
+        // dd($request->all());
+
         Eleve::create($info);
 
         return redirect()->route('eleves.index')->with('message', 'Elève enregistré');
@@ -92,6 +94,7 @@ class EleveController extends Controller
     public function show(Eleve $eleve)
     {
         $eleve->load('classe', 'paiements');
+        dd($eleve);
         return view('eleves.show', compact('eleve'));
     }
 

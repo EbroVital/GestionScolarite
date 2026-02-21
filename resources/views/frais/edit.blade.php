@@ -7,9 +7,6 @@
     <div class="container py-4">
         {{-- En-tête --}}
         <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('frais-scolaire.show', $frais) }}" class="btn btn-outline-secondary me-3">
-                <i class="fas fa-arrow-left"></i>
-            </a>
             <h1 class="h2 mb-0">Modifier les frais scolaires</h1>
         </div>
 
@@ -115,7 +112,7 @@
 
                             {{-- Boutons --}}
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('frais-scolaire.show', $frais) }}" class="btn btn-secondary">
+                                <a href="{{ route('frais-scolaire.show') }}" class="btn btn-secondary">
                                     <i class="fas fa-times me-1"></i>Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">

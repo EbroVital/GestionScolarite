@@ -10,7 +10,7 @@ class anneeScolaire extends Model
     use HasFactory;
 
     protected $fillable = [
-        'libelle'
+        'libelle', 'date_debut', 'date_fin'
     ];
 
 

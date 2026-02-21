@@ -7,17 +7,10 @@
         {{-- En-tête --}}
         <div class="flex justify-between items-center mb-6">
             <div class="flex items-center">
-                <a href="{{ route('eleves.index') }}"
-                class="mr-4 text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left text-xl"></i>
-                </a>
                 <h1 class="text-3xl font-bold text-gray-800">Fiche élève</h1>
             </div>
             <div class="flex gap-2">
-                <a href="{{ route('eleves.edit', $eleve) }}"
-                class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded-lg transition duration-200">
-                    <i class="fas fa-edit mr-2"></i> Modifier
-                </a>
+
                 <button onclick="window.print()"
                         class="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200">
                     <i class="fas fa-print mr-2"></i> Imprimer
@@ -35,7 +28,7 @@
                             {{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-800">{{ $eleve->nom_complet }}</h2>
+                            <h2 class="text-2xl font-bold text-gray-800">{{ $eleve->NomComplet }}</h2>
                             <p class="text-gray-600">Matricule : <span class="font-semibold">{{ $eleve->matricule }}</span></p>
                             <p class="text-gray-600">Classe : <span class="font-semibold">{{ $eleve->classe->niveau }}</span></p>
                         </div>

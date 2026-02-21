@@ -36,7 +36,7 @@ class Eleve extends Model
     }
 
     public function getNomCompletAttribute() {
-        return '{$this->nom} {$this->prenom}';
+        return $this->nom.' '. $this->prenom  ;
     }
 
     protected $casts = [

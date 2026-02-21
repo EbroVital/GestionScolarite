@@ -15,9 +15,8 @@
 
         {{-- Messages --}}
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success text-center" role="alert">
                 {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
 

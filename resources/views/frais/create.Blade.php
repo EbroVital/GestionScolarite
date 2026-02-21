@@ -7,7 +7,7 @@
     <div class="container py-4">
         {{-- En-tête --}}
         <div class="d-flex align-items-center mb-4">
-            <h1 class="h2 mb-0">Créer un frais scolaire</h1>
+            <h1 class="h2 mb-0">Ajouter un frais scolaire</h1>
         </div>
 
         <div class="row justify-content-center">
@@ -26,7 +26,7 @@
                                 <select name="niveau"
                                         id="niveau"
                                         class="form-control form-select-lg @error('niveau') is-invalid @enderror"
-                                        required>
+                                        >
                                     <option value="">-- Sélectionner un niveau --</option>
                                     <option value="6ème" {{ old('niveau') == '6ème' ? 'selected' : '' }}>6ème</option>
                                     <option value="5ème" {{ old('niveau') == '5ème' ? 'selected' : '' }}>5ème</option>
@@ -57,7 +57,7 @@
                                         step="1000"
                                         class="form-control @error('montant') is-invalid @enderror"
                                         placeholder="Ex: 100000"
-                                        required>
+                                        >
                                     <span class="input-group-text">FCFA</span>
                                     @error('montant')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    @push('scripts')
+
         <script>
             // Fonction pour définir le montant
             function setMontant(value) {
@@ -156,5 +156,5 @@
                 }
             });
         </script>
-    @endpush
+    
 @endsection

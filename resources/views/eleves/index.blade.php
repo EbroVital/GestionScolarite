@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             @section('h3', 'Liste des élèves')
             <a href="{{ route('eleves.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Nouvel élève
+                <i class="fas fa-plus me-2"></i> Nouvel élève
             </a>
         </div>
 
@@ -87,11 +87,11 @@
                                     <td class="fw-bold">{{ $eleve->matricule }}</td>
                                     <td>
                                         <div class="fw-semibold">{{ $eleve->NomComplet }}</div>
-                                        <small class="text-muted">{{ $eleve->date_naissance->format('d/m/Y') }}</small>
                                     </td>
+                                    <td> <small class="text-muted">{{ $eleve->date_naissance->format('d/m/Y') }}</small> </td>
                                     <td>{{ $eleve->classe->nom ?? 'Non définie' }}</td>
                                     <td>
-                                        <span class="badge {{ $eleve->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
+                                        <span class="text-white badge {{ $eleve->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
                                             {{ $eleve->sexe == 'M' ? 'Masculin' : 'Féminin' }}
                                         </span>
                                     </td>
