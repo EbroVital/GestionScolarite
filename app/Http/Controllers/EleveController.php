@@ -6,6 +6,7 @@ use App\Http\Requests\EleveRequest;
 use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EleveController extends Controller
 {
@@ -45,11 +46,14 @@ class EleveController extends Controller
 
         // Filtre par recherche
         if ($request->filled('search')) {
-            $search = $request->search;
+
+            $search = trim($request->search);
+
             $query->where(function($q) use ($search) {
                 $q->where('nom', 'like', "%{$search}%")
                 ->orWhere('prenom', 'like', "%{$search}%")
-                ->orWhere('matricule', 'like', "%{$search}%");
+                ->orWhere('matricule', 'like', "%{$search}%")
+                ->orWhere(DB::raw("CONCAT(prenom, ' ', nom)"), 'like', "%{$search}%")->orWhere(DB::raw("CONCAT(nom, ' ', prenom)"), 'like', "%{$search}%");
             });
         }
 
@@ -62,10 +66,11 @@ class EleveController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $classes = Classe::all();
-        return view('eleves.create', compact('classes'));
+        $classeId = $request->classe_id;
+        return view('eleves.create', compact('classes', 'classeId'));
     }
 
     /**

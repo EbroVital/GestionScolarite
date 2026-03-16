@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function(){
         Route::resource('paiements', PaiementController::class);
         Route::get('/paiements/eleves/{classe}', [PaiementController::class, 'getEleves'])->name('paiements.eleves');
         Route::get('/reçu/{id}', [recuController::class, 'show'])->name('recus.show');
+        Route::get('/recus/{id}/pdf', [RecuController::class, 'downloadPDF'])->name('recus.download');
     });
 
     Route::middleware(['role:admin'])->group(function () {

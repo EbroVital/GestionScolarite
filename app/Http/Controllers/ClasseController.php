@@ -25,7 +25,7 @@ class ClasseController extends Controller
     public function create()
     {
         $frais = fraisScolaire::all();
-        return view('classes.create', compact('frais'));
+        return view('classes.create', compact('frais', 'classeId'));
     }
 
     /**

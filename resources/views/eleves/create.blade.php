@@ -109,7 +109,7 @@
                                                 required>
                                             <option value="">-- Sélectionner une classe --</option>
                                             @foreach($classes as $classe)
-                                                <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
+                                                <option value="{{ $classe->id }}" {{ (old('classe_id')  == $classe->id || $classeId == $classe->id) ? 'selected' : '' }}>
                                                     {{ $classe->nom }}
                                                 </option>
                                             @endforeach

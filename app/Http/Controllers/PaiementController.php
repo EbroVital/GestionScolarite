@@ -11,6 +11,7 @@ use App\Models\Recu;
 use App\Models\TypePaiement;
 // use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaiementController extends Controller
 {
@@ -22,14 +23,23 @@ class PaiementController extends Controller
         $query = Paiement::with(['eleve.classe', 'typePaiement', 'recu'])->orderBy('date_paiement', 'desc');
 
         if ($request->filled('search')) {
-            
-            $search = $request->search;
+
+            $search = trim($request->search);
 
             $query->whereHas('eleve', function($q) use ($search) {
-                $q->where('nom', 'like', "%{$search}%")
-                ->orWhere('prenom', 'like', "%{$search}%")
-                ->orWhere('matricule', 'like', "%{$search}%");
+            $q->where(function($subQuery) use ($search) {
+                // Recherche dans le matricule
+                $subQuery->where('matricule', 'like', "%{$search}%")
+                    // OU dans le nom
+                    ->orWhere('nom', 'like', "%{$search}%")
+                    // OU dans le prénom
+                    ->orWhere('prenom', 'like', "%{$search}%")
+                    // OU dans nom complet (MySQL/MariaDB)
+                    ->orWhere(DB::raw("CONCAT(prenom, ' ', nom)"), 'like', "%{$search}%")
+                    // OU dans nom complet inversé
+                    ->orWhere(DB::raw("CONCAT(nom, ' ', prenom)"), 'like', "%{$search}%");
             });
+        });
         }
 
         $paiements = $query->paginate(10);

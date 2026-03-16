@@ -17,7 +17,8 @@
             <div class="d-flex gap-2">
                 <a href="{{ route('classe.edit', $classe) }}" class="btn btn-warning">
                     <i class="fas fa-edit me-1"></i> &nbsp; Modifier
-                </a>
+                </a> &nbsp; &nbsp;
+                <a href="{{ route('classe.index')}}" class="btn btn-secondary"> Retour</a> &nbsp; &nbsp;
                 <a href="{{ route('eleves.create', ['classe_id' => $classe->id]) }}" class="btn btn-primary">
                     <i class="fas fa-user-plus me-1"></i> &nbsp; Ajouter un élève
                 </a>

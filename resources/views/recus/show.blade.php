@@ -11,12 +11,9 @@
                 <i class="fas fa-arrow-left me-2"></i> &nbsp; Retour
             </a>
             <div class="d-flex gap-2">
-                <button onclick="window.print()" class="btn btn-primary">
-                    <i class="fas fa-print me-2"></i>Imprimer
-                </button>
-                <button onclick="downloadPDF()" class="btn btn-success">
-                    <i class="fas fa-download me-2"></i>Télécharger PDF
-                </button>
+                <a href="{{ route('recus.download', $recu->id) }}" class="btn btn-success">
+                    <i class="fas fa-download me-2"></i> &nbsp; Télécharger PDF
+                </a>
             </div>
         </div>
 
@@ -55,7 +52,7 @@
                         <h5 class="text-uppercase text-muted mb-3">Informations de l'élève</h5>
                         <table class="table table-borderless">
                             <tr>
-                                <td class="text-muted ps-0" style="width: 40%;">Nom complet :</td>
+                                <td class="text-muted ps-0" style="width: 55%;">Nom complet :</td>
                                 <td class="fw-bold">{{ $recu->paiement->eleve->nom_complet }}</td>
                             </tr>
                             <tr>
@@ -77,7 +74,7 @@
                         <h5 class="text-uppercase text-muted mb-3">Détails du paiement</h5>
                         <table class="table table-borderless">
                             <tr>
-                                <td class="text-muted ps-0" style="width: 40%;">Date :</td>
+                                <td class="text-muted ps-0" style="width: 50%;">Date :</td>
                                 <td class="fw-bold">{{ $recu->date_emission }}</td>
                             </tr>
                             <tr>
@@ -232,69 +229,7 @@
         </div>
     </div>
 
-    @push('styles')
-        <style>
-            @media print {
-                /* Masquer les éléments non imprimables */
-                .no-print {
-                    display: none !important;
-                }
 
-                /* Optimiser pour l'impression */
-                body {
-                    background: white !important;
-                }
 
-                #recu {
-                    box-shadow: none !important;
-                    border: 2px solid #ddd !important;
-                    page-break-inside: avoid;
-                }
 
-                /* Forcer les couleurs */
-                .text-primary, .bg-primary {
-                    color: #0d6efd !important;
-                    background-color: #0d6efd !important;
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-
-                .text-success {
-                    color: #198754 !important;
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-
-                .badge {
-                    border: 2px solid #198754 !important;
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-
-                .progress-bar {
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-            }
-
-            /* Style pour l'écran */
-            #recu {
-                max-width: 900px;
-                margin: 0 auto;
-            }
-        </style>
-    @endpush
-
-    @push('scripts')
-        <script>
-        function downloadPDF() {
-            // Simulation du téléchargement
-            // En production, tu peux utiliser une librairie comme html2pdf ou dompdf
-            alert('Fonctionnalité de téléchargement PDF à implémenter avec une librairie comme dompdf ou snappy');
-
-            // Ou simplement imprimer en PDF
-            window.print();
-        }
-        </script>
-    @endpush
 @endsection
