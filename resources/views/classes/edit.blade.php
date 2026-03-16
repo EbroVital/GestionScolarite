@@ -7,22 +7,20 @@
     <div class="container py-4">
         {{-- En-tête --}}
         <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('classe.show', $classe) }}" class="btn btn-outline-secondary me-3">
-                <i class="fas fa-arrow-left"></i>
-            </a>
+
             <h1 class="h2 mb-0">Modifier la classe</h1>
         </div>
 
         {{-- Info box --}}
         <div class="alert alert-info d-flex align-items-center mb-4">
-            <i class="fas fa-info-circle me-2"></i>
+            <i class="fas fa-info-circle me-2"></i> &nbsp;
             <div>
                 Vous modifiez la classe <strong>{{ $classe->niveau }}</strong>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
+        <div class="container justify-content-center">
+            <div>
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <form action="{{ route('classe.update', $classe) }}" method="POST">
@@ -56,7 +54,7 @@
                                 </label>
                                 <select name="niveau"
                                         id="niveau"
-                                        class="form-select @error('niveau') is-invalid @enderror"
+                                        class="form-control @error('niveau') is-invalid @enderror"
                                         required>
                                     <option value="">-- Sélectionner un niveau --</option>
                                     <option value="6ème" {{ old('niveau', $classe->niveau) == '6ème' ? 'selected' : '' }}>6ème</option>
@@ -94,7 +92,7 @@
                                 </label>
                                 <select name="frais_scolaire_id"
                                         id="frais_scolaire_id"
-                                        class="form-select @error('frais_scolaire_id') is-invalid @enderror"
+                                        class="form-control @error('frais_scolaire_id') is-invalid @enderror"
                                         required>
                                     <option value="">-- Sélectionner les frais --</option>
                                     @foreach(\App\Models\FraisScolaire::all() as $fraisScolaire)
@@ -113,9 +111,9 @@
                             {{-- Avertissement --}}
                             @if($classe->eleves->count() > 0)
                                 <div class="alert alert-warning d-flex align-items-start mb-4">
-                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i>
+                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i> &nbsp;
                                     <div>
-                                        <strong>Attention !</strong> Cette classe contient {{ $classe->eleves->count() }} élève(s). La modification des frais de scolarité affectera tous les élèves de cette classe.
+                                        <strong> Attention !</strong> Cette classe contient {{ $classe->eleves->count() }} élève(s). La modification des frais de scolarité affectera tous les élèves de cette classe.
                                     </div>
                                 </div>
                             @endif
@@ -138,14 +136,13 @@
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-start gap-2">
-                                <a href="{{ route('classes.show', $classe) }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                <a href="{{ route('classe.index') }}" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i> &nbsp; Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer les modifications
+                                    <i class="fas fa-save me-1"></i> &nbsp; Enregistrer les modifications
                                 </button>
-                            </div>
+
                         </form>
                     </div>
                 </div>

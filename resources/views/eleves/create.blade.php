@@ -12,8 +12,8 @@
         {{-- Formulaire --}}
         <div class="row">
             <div class="card shadow-sm">
-                    <div class="card-body">
-                        <form action="{{ route('eleves.store') }}" method="POST">
+                <div class="card-body">
+                    <form action="{{ route('eleves.store') }}" method="POST">
                             @csrf
 
                             {{-- Informations personnelles --}}
@@ -110,7 +110,7 @@
                                             <option value="">-- Sélectionner une classe --</option>
                                             @foreach($classes as $classe)
                                                 <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
-                                                    {{ $classe->niveau }}
+                                                    {{ $classe->nom }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -172,16 +172,15 @@
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex">
                                 <a href="{{ route('eleves.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i> Annuler
+                                    <i class="fas fa-times me-1"></i> &nbsp; Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i> Enregistrer
+                                    <i class="fas fa-save me-1"></i> &nbsp; Enregistrer
                                 </button>
-                            </div>
-                        </form>
-                    </div>
+
+                    </form>
+                </div>
             </div>
 
         </div>

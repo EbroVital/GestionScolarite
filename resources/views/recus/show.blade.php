@@ -8,7 +8,7 @@
         {{-- Boutons d'action (non imprimables) --}}
         <div class="d-flex justify-content-between align-items-center mb-4 no-print">
             <a href="{{ route('paiements.index') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left me-2"></i>Retour
+                <i class="fas fa-arrow-left me-2"></i> &nbsp; Retour
             </a>
             <div class="d-flex gap-2">
                 <button onclick="window.print()" class="btn btn-primary">
@@ -27,7 +27,7 @@
                 <div class="row mb-5">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <h2 class="text-primary mb-1">ÉCOLE [NOM]</h2>
+                            <h2 class="text-primary mb-1">ÉCOLE xx </h2>
                             <p class="text-muted mb-0">
                                 Adresse de l'école<br>
                                 Téléphone : +225 XX XX XX XX XX<br>
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <div class="badge bg-success fs-5 px-4 py-2 mb-3">
-                            <i class="fas fa-check-circle me-2"></i>PAYÉ
+                        <div class="badge bg-success fs-5 px-4 py-2 mb-3 text-white">
+                            <i class="fas fa-check-circle me-2"></i> &nbsp; PAYÉ
                         </div>
                         <div>
                             <h4 class="text-uppercase mb-1">Reçu N°</h4>
@@ -78,7 +78,7 @@
                         <table class="table table-borderless">
                             <tr>
                                 <td class="text-muted ps-0" style="width: 40%;">Date :</td>
-                                <td class="fw-bold">{{ $recu->date_emission->format('d/m/Y à H:i') }}</td>
+                                <td class="fw-bold">{{ $recu->date_emission }}</td>
                             </tr>
                             <tr>
                                 <td class="text-muted ps-0">Mode de paiement :</td>
@@ -122,7 +122,7 @@
                 <div class="card border-primary mb-5">
                     <div class="card-header bg-primary text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-chart-bar me-2"></i>Situation financière de l'élève
+                            <i class="fas fa-chart-bar me-2"></i> &nbsp; Situation financière de l'élève
                         </h6>
                     </div>
                     <div class="card-body">
@@ -152,7 +152,7 @@
                                 <div class="progress-bar bg-success"
                                     style="width: {{ min($pourcentage, 100) }}%"></div>
                             </div>
-                            <small class="text-muted">{{ number_format($pourcentage, 1) }}% payé</small>
+                            <small class="text-muted">{{ number_format($pourcentage) }}% payé</small>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                         <tbody>
                             @foreach($recu->paiement->eleve->paiements->sortByDesc('date_paiement') as $paiement)
                                 <tr class="{{ $paiement->id === $recu->paiement_id ? 'table-success' : '' }}">
-                                    <td>{{ $paiement->date_paiement->format('d/m/Y') }}</td>
+                                    <td>{{ $paiement->date_paiement }}</td>
                                     <td class="fw-bold text-success">{{ formater_montant($paiement->montant) }}</td>
                                     <td>{{ $paiement->typePaiement->libelle }}</td>
                                     <td>

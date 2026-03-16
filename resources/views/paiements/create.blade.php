@@ -32,7 +32,7 @@
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}"
                                             {{ $classeId == $classe->id ? 'selected' : '' }}>
-                                            {{ $classe->niveau }} ({{ $classe->anneeScolaire->libelle }})
+                                            {{ $classe->nom }} ({{ $classe->anneeScolaire->libelle }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -67,11 +67,11 @@
 
                             {{-- Informations élève (si sélectionné) --}}
                             @if($eleve)
-                                <div class="alert alert-info mb-4">
+                                <div class="card shadow p-3 mb-4">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <small class="text-muted d-block">Frais de scolarité</small>
-                                            <strong>{{ formater_montant($frais->montant) }}</strong>
+                                            <small class="text-muted d-block text-bold">Frais de scolarité</small>
+                                            <strong class="text-secondary">{{ formater_montant($frais->montant) }}</strong>
                                         </div>
                                         <div class="col-md-4">
                                             <small class="text-muted d-block">Total payé</small>
@@ -185,14 +185,13 @@
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-start">
                                 <a href="{{ route('paiements.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                    <i class="fas fa-times me-1"></i> &nbsp; Annuler
                                 </a>
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-check me-1"></i>Enregistrer le paiement
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-check me-1"></i> &nbsp; Enregistrer le paiement
                                 </button>
-                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -203,7 +202,7 @@
                 <div class="card shadow-sm mb-3">
                     <div class="card-header bg-primary text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-info-circle me-2"></i>Instructions
+                            <i class="fas fa-info-circle me-2"></i> &nbsp; Instructions
                         </h6>
                     </div>
                     <div class="card-body">
@@ -218,10 +217,12 @@
                 </div>
 
                 <div class="card shadow-sm border-warning">
-                    <div class="card-body">
-                        <h6 class="text-warning mb-2">
-                            <i class="fas fa-exclamation-triangle me-2"></i>Important
+                    <div class="card-header bg-warning">
+                        <h6 class="text-white mb-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>&nbsp; Important
                         </h6>
+                    </div>
+                    <div class="card-body">
                         <ul class="small mb-0 ps-3">
                             <li class="mb-1">Le montant ne peut pas dépasser le solde restant</li>
                             <li class="mb-1">Le reçu sera automatiquement généré</li>
@@ -233,7 +234,7 @@
         </div>
     </div>
 
-    @push('scripts')
+
         <script>
             // Charger les élèves quand on change de classe
             document.getElementById('classe_id').addEventListener('change', function() {
@@ -260,6 +261,6 @@
                 }
             });
         </script>
-    @endpush
+
 
 @endsection

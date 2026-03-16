@@ -72,14 +72,12 @@
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-start gap-2">
                                 <a href="{{ route('type-paiement.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                    <i class="fas fa-times me-1"></i> &nbsp; Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer
+                                    <i class="fas fa-save me-1"></i> &nbsp; Enregistrer
                                 </button>
-                            </div>
                         </form>
                     </div>
                 </div>

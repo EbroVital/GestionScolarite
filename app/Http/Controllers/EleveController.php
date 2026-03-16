@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EleveRequest;
-use App\Models\anneeScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
@@ -74,9 +73,6 @@ class EleveController extends Controller
      */
     public function store(EleveRequest $request)
     {
-        anneeScolaire::firstOrCreate([
-            'libelle' => annee_scolaire_actuelle()
-        ]);
 
         $info = $request->validated();
         $info['matricule'] = genererMatricule();
@@ -91,28 +87,28 @@ class EleveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Eleve $eleve)
+    public function show(Eleve $elefe)
     {
-        $eleve->load('classe', 'paiements');
-        dd($eleve);
-        return view('eleves.show', compact('eleve'));
+        $elefe->load('classe', 'paiements');
+        // dd($elefe);
+        return view('eleves.show', compact('elefe'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Eleve $eleve)
+    public function edit(Eleve $elefe)
     {
         $classes = Classe::all();
-        return view('eleves.edit', compact('eleve', 'classes'));
+        return view('eleves.edit', compact('elefe', 'classes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EleveRequest $request, Eleve $eleve)
+    public function update(EleveRequest $request, Eleve $elefe)
     {
-        $eleve->update($request->validated());
+        $elefe->update($request->validated());
         return redirect()->route('eleves.index')->with('message', 'Mise à jour éffectuée');
     }
 

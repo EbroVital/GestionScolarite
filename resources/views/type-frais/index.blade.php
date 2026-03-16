@@ -15,17 +15,16 @@
 
         {{-- Messages --}}
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible text-center" role="alert">
                 {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
 
         {{-- Description --}}
         <div class="alert alert-info d-flex align-items-start mb-4">
-            <i class="fas fa-info-circle me-2 mt-1"></i>
+            <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
             <div>
-                <strong>À propos :</strong> Les types de paiement permettent de catégoriser les modes de règlement utilisés (espèces, mobile money, virement, etc.)
+                <strong>À propos :</strong> Les types de paiement permettent de catégoriser les modes de règlement utilisés (espèces, mobile money, virement, etc.) . Le bouton "Supprimer" est désactivé parce que le type de paiement est déjà utilisé pour régler un paiement dans le cas contraire il serait actif .
             </div>
         </div>
 
@@ -43,51 +42,49 @@
                             <table class="table table-hover mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="width: 50px;">#</th>
                                         <th>Libellé</th>
                                         <th class="text-center" style="width: 150px;">Utilisations</th>
                                         <th class="text-center" style="width: 150px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($typePaiements as $index => $type)
+                                    @forelse($typePaiements as $type_paiement)
                                         <tr>
-                                            <td class="text-muted">{{ $index + 1 }}</td>
+                                            {{-- <td class="text-muted">{{ $index + 1 }}</td> --}}
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3"
-                                                        style="width: 40px; height: 40px;">
-                                                        <i class="fas fa-credit-card text-primary"></i>
-                                                    </div>
+
                                                     <div>
-                                                        <div class="fw-semibold">{{ $type->libelle }}</div>
-                                                        <small class="text-muted">Créé le {{ $type->created_at->format('d/m/Y') }}</small>
+                                                        <div class="fw-semibold">{{ $type_paiement->libelle }}</div>
+                                                        <small class="text-muted">Créé le {{ $type_paiement->created_at->format('d/m/Y') }}</small>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge bg-info rounded-pill">
-                                                    {{ $type->paiements_count }} paiement(s)
+                                                <span class="badge bg-info rounded-pill text-white">
+                                                    {{ $type_paiement->paiements_count }} paiement(s)
                                                 </span>
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="{{ route('type-paiement.show', $type) }}"
+                                                    <a href="{{ route('type-paiement.show', $type_paiement) }}"
                                                     class="btn btn-info"
                                                     title="Voir">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('type-paiement.edit', $type) }}"
+                                                    <a href="{{ route('type-paiement.edit', $type_paiement) }}"
                                                     class="btn btn-warning"
                                                     title="Modifier">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button onclick="confirmDelete({{ $type->id }}, '{{ $type->libelle }}')"
-                                                            class="btn btn-danger"
-                                                            title="Supprimer"
-                                                            {{ $type->paiements_count > 0 ? 'disabled' : '' }}>
+                                                    <button onclick="confirmDelete({{ $type_paiement->id }})"class="btn btn-sm btn-danger" title="Supprimer" {{ $type_paiement->paiements_count > 0 ? 'disabled' : ''  }} >
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+
+                                                        <form id="form-suppression-{{ $type_paiement->id}}" action="{{ route('type-paiement.destroy', $type_paiement->id) }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -134,7 +131,7 @@
                             @endphp
                             @if($plusUtilise)
                                 <strong>{{ $plusUtilise->libelle }}</strong>
-                                <span class="badge bg-success ms-2">{{ $plusUtilise->paiements_count }}</span>
+                                <span class="badge bg-success ms-2 text-white">{{ $plusUtilise->paiements_count }}</span>
                             @else
                                 <span class="text-muted">-</span>
                             @endif
@@ -151,11 +148,11 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0 small">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Espèces</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mobile Money</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Virement bancaire</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Chèque</li>
-                            <li class="mb-0"><i class="fas fa-check text-success me-2"></i>Carte bancaire</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Espèces</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Mobile Money</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Virement bancaire</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Chèque</li>
+                            <li class="mb-0"><i class="fas fa-check text-success me-2"></i> Carte bancaire</li>
                         </ul>
                     </div>
                 </div>
@@ -163,21 +160,23 @@
         </div>
     </div>
 
-    {{-- Modal de confirmation de suppression --}}
-    <form id="delete-form" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
-
-    @push('scripts')
-        <script>
-        function confirmDelete(id, libelle) {
-            if (confirm(`Êtes-vous sûr de vouloir supprimer le type "${libelle}" ?\nCette action est irréversible.`)) {
-                const form = document.getElementById('delete-form');
-                form.action = `/type-paiement/${id}`;
-                form.submit();
-            }
-        }
-        </script>
-    @endpush
 @endsection
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: "Cette action est irréversible.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('form-suppression-' + id).submit();
+            }
+        });
+    }
+</script>

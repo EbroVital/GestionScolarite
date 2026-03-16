@@ -102,21 +102,20 @@
 
                             {{-- Info --}}
                             <div class="alert alert-info d-flex align-items-start mb-4">
-                                <i class="fas fa-info-circle me-2 mt-1"></i>
+                                <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
                                 <div class="small">
                                     Ce montant sera appliqué à toutes les classes de ce niveau. Vous pourrez le modifier ultérieurement si nécessaire.
                                 </div>
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-start gap-2">
                                 <a href="{{ route('frais-scolaire.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                    <i class="fas fa-times me-1"></i> &nbsp;Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer
+                                    <i class="fas fa-save me-1"></i> &nbsp; Enregistrer
                                 </button>
-                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -156,5 +155,5 @@
                 }
             });
         </script>
-    
+
 @endsection

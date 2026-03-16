@@ -9,6 +9,7 @@ use App\Models\fraisScolaire;
 use App\Models\Paiement;
 use App\Models\Recu;
 use App\Models\TypePaiement;
+// use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaiementController extends Controller
@@ -16,12 +17,30 @@ class PaiementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $paiements = Paiement::with(['eleve.classe', 'typePaiement', 'recu'])->orderBy('date_paiement', 'desc')->get();
-        $total = Paiement::sum('montant');
+        $query = Paiement::with(['eleve.classe', 'typePaiement', 'recu'])->orderBy('date_paiement', 'desc');
 
-        return view('paiements.index', compact('paiements', 'total'));
+        if ($request->filled('search')) {
+            
+            $search = $request->search;
+
+            $query->whereHas('eleve', function($q) use ($search) {
+                $q->where('nom', 'like', "%{$search}%")
+                ->orWhere('prenom', 'like', "%{$search}%")
+                ->orWhere('matricule', 'like', "%{$search}%");
+            });
+        }
+
+        $paiements = $query->paginate(10);
+
+        // Garder les paramètres de recherche dans la pagination
+        $paiements->appends($request->only('search'));
+
+        $total = Paiement::sum('montant');
+        $today = Paiement::whereDate('date_paiement', today())->sum('montant');
+
+        return view('paiements.index', compact('paiements', 'total', 'today'));
 
     }
 

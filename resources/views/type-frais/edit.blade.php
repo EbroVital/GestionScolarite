@@ -14,15 +14,15 @@
         <div class="alert alert-info d-flex align-items-center mb-4">
             <i class="fas fa-info-circle me-2"></i>
             <div>
-                Vous modifiez le type <strong>{{ $type->libelle }}</strong>
+                Vous modifiez le type <strong>{{ $type_paiement->libelle }}</strong>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
+        <div class="container justify-content-center">
+            <div>
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form action="{{ route('type-paiement.update', $type) }}" method="POST">
+                        <form action="{{ route('type-paiement.update', $type_paiement) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -35,7 +35,7 @@
                                 <input type="text"
                                     name="libelle"
                                     id="libelle"
-                                    value="{{ old('libelle', $type->libelle) }}"
+                                    value="{{ old('libelle', $type_paiement->libelle) }}"
                                     class="form-control form-control-lg @error('libelle') is-invalid @enderror"
                                     placeholder="Ex: Espèces, Mobile Money, Virement..."
                                     required
@@ -47,11 +47,11 @@
                             </div>
 
                             {{-- Avertissement si utilisé --}}
-                            @if($type->paiements()->count() > 0)
+                            @if($type_paiement->paiements()->count() > 0)
                                 <div class="alert alert-warning d-flex align-items-start mb-4">
-                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i>
+                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i> &nbsp;
                                     <div>
-                                        <strong>Attention !</strong> Ce type est utilisé dans <strong>{{ $type->paiements()->count() }}</strong> paiement(s). La modification du libellé affectera l'affichage de tous ces paiements.
+                                        <strong>Attention !</strong> Ce type est utilisé dans <strong>{{ $type_paiement->paiements()->count() }}</strong> paiement(s). La modification du libellé affectera l'affichage de tous ces paiements.
                                     </div>
                                 </div>
                             @endif
@@ -59,29 +59,28 @@
                             {{-- Informations --}}
                             <div class="card bg-light mb-4">
                                 <div class="card-body">
-                                    <h6 class="mb-3">Informations actuelles</h6>
+                                    <h6 class="mb-3 text-center">Informations actuelles</h6>
                                     <div class="row">
                                         <div class="col-6">
                                             <small class="text-muted d-block">Paiements</small>
-                                            <strong>{{ $type->paiements()->count() }}</strong>
+                                            <strong>{{ $type_paiement->paiements()->count() }}</strong>
                                         </div>
                                         <div class="col-6">
                                             <small class="text-muted d-block">Créé le</small>
-                                            <strong>{{ $type->created_at->format('d/m/Y') }}</strong>
+                                            <strong>{{ $type_paiement->created_at->format('d/m/Y') }}</strong>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-start gap-2">
-                                <a href="{{ route('type-paiement.show', $type) }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
-                                </a>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer les modifications
-                                </button>
-                            </div>
+                            <a href="{{ route('type-paiement.show', $type_paiement) }}" class="btn btn-secondary">
+                                <i class="fas fa-times me-1"></i> &nbsp; Annuler
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> &nbsp;Enregistrer les modifications
+                            </button>
+
                         </form>
                     </div>
                 </div>

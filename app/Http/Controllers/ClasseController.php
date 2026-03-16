@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClasseRequest;
+use App\Models\anneeScolaire;
 use App\Models\Classe;
 use App\Models\fraisScolaire;
 use Illuminate\Http\Request;
@@ -32,7 +33,17 @@ class ClasseController extends Controller
      */
     public function store(ClasseRequest $request)
     {
-        Classe::create($request->validated());
+
+        $anneeScolaire = anneeScolaire::firstOrCreate([
+            'libelle' => annee_scolaire_actuelle(),
+            'est_active' => true
+        ]);
+
+        $info = $request->validated();
+        $info['annee_scolaire_id'] = $anneeScolaire->id;
+
+        Classe::create($info);
+
         return redirect()->route('classe.index')->with('message', 'Classe enregistrée');
     }
 
@@ -58,7 +69,11 @@ class ClasseController extends Controller
      */
     public function update(ClasseRequest $request, Classe $classe)
     {
-        $classe->update($request->validated());
+
+        $info = $request->validated();
+
+        $classe->update($info);
+
         return redirect()->route('classe.index')->with('message', 'Mise à jour éffectué');
     }
 

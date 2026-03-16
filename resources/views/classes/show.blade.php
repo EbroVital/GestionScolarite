@@ -8,9 +8,7 @@
         {{-- En-tête --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="d-flex align-items-center">
-                <a href="{{ route('classe.index') }}" class="btn btn-outline-secondary me-3">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
+
                 <div>
                     <h1 class="h2 mb-0">{{ $classe->nom }}</h1>
                     <p class="text-muted mb-0">{{ $classe->niveau }} - {{ $classe->anneeScolaire->libelle }}</p>
@@ -18,10 +16,10 @@
             </div>
             <div class="d-flex gap-2">
                 <a href="{{ route('classe.edit', $classe) }}" class="btn btn-warning">
-                    <i class="fas fa-edit me-1"></i>Modifier
+                    <i class="fas fa-edit me-1"></i> &nbsp; Modifier
                 </a>
                 <a href="{{ route('eleves.create', ['classe_id' => $classe->id]) }}" class="btn btn-primary">
-                    <i class="fas fa-user-plus me-1"></i>Ajouter un élève
+                    <i class="fas fa-user-plus me-1"></i> &nbsp; Ajouter un élève
                 </a>
             </div>
         </div>
@@ -98,7 +96,7 @@
                                 <i class="fas fa-users-slash fa-3x text-muted mb-3"></i>
                                 <p class="text-muted mb-3">Aucun élève dans cette classe</p>
                                 <a href="{{ route('eleves.create', ['classe_id' => $classe->id]) }}" class="btn btn-primary">
-                                    <i class="fas fa-user-plus me-1"></i>Ajouter le premier élève
+                                    <i class="fas fa-user-plus me-1"></i> &nbsp; Ajouter le premier élève
                                 </a>
                             </div>
                         @endif
@@ -112,7 +110,7 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-primary text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-info-circle me-2"></i>Informations
+                            <i class="fas fa-info-circle me-2"></i> &nbsp; Informations
                         </h6>
                     </div>
                     <div class="card-body">
@@ -147,7 +145,7 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-success text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-chart-line me-2"></i>Statistiques
+                            <i class="fas fa-chart-line me-2"></i> &nbsp; Statistiques
                         </h6>
                     </div>
                     <div class="card-body">
@@ -179,7 +177,7 @@
                         <div>
                             <div class="d-flex justify-content-between small mb-1">
                                 <span class="text-muted">Taux de recouvrement</span>
-                                <strong>{{ number_format($pourcentage, 1) }}%</strong>
+                                <strong>{{ number_format($pourcentage) }}%</strong>
                             </div>
                             <div class="progress" style="height: 10px;">
                                 <div class="progress-bar bg-success"
@@ -193,7 +191,7 @@
                 <div class="card shadow-sm">
                     <div class="card-header bg-info text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-venus-mars me-2"></i>Répartition
+                            <i class="fas fa-venus-mars me-2"></i> &nbsp; Répartition
                         </h6>
                     </div>
                     <div class="card-body">

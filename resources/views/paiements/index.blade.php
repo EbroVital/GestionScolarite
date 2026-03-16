@@ -29,9 +29,9 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-white-50 mb-1">Total encaissé</h6>
-                                <h3 class="mb-0">{{ $total }}</h3>
+                                <h3 class="mb-0">{{ formater_montant($total) }}</h3>
                             </div>
-                            <i class="fas fa-money-bill-wave fa-3x opacity-50"></i>
+                            {{-- <i class="fas fa-money-bill-wave fa-3x opacity-50"></i> --}}
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                 <h6 class="text-white-50 mb-1">Nombre de paiements</h6>
                                 <h3 class="mb-0">{{ $paiements->count() }}</h3>
                             </div>
-                            <i class="fas fa-receipt fa-3x opacity-50"></i>
+                            {{-- <i class="fas fa-receipt fa-3x opacity-50"></i> --}}
                         </div>
                     </div>
                 </div>
@@ -56,13 +56,44 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="text-white-50 mb-1">Aujourd'hui</h6>
-                                <h3 class="mb-0">{{ $paiements->where('date_paiement', '>=', today())->sum('montant') }}</h3>
+                                <h6 class="text-white-50 mb-1">Total du jour</h6>
+                                <h3 class="mb-0">{{ formater_montant($today)  }}</h3>
                             </div>
-                            <i class="fas fa-calendar-day fa-3x opacity-50"></i>
+                            {{-- <i class="fas fa-calendar-day fa-3x opacity-50"></i> --}}
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        {{-- Filtres de recherche --}}
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="{{ route('paiements.index') }}" method="GET">
+                    <div class="row g-3">
+                        {{-- Barre de recherche --}}
+                        <div class="col-md-5">
+                            <label for="search" class="form-label">Recherche</label>
+                            <input type="text"
+                                name="search"
+                                id="search"
+                                value="{{ request('search') }}"
+                                class="form-control"
+                                placeholder="Nom, prénom ou matricule...">
+                        </div>
+
+                        {{-- Boutons --}}
+                        <div class="col-md-5 d-flex align-items-end gap-3">
+                            <button type="submit" class="btn btn-primary flex-fill">
+                                {{-- <i class="fas fa-search me-1"></i> --}}
+                                Rechercher
+                            </button> &nbsp; &nbsp;
+                            <a href="{{ route('paiements.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -91,17 +122,17 @@
                             @forelse($paiements as $paiement)
                                 <tr>
                                     <td>
-                                        <div class="fw-semibold">{{ $paiement->date_paiement->format('d/m/Y') }}</div>
-                                        <small class="text-muted">{{ $paiement->date_paiement->format('H:i') }}</small>
+                                        <div class="fw-semibold">{{ $paiement->date_paiement }}</div>
+                                        {{-- <small class="text-muted">{{ $paiement->date_paiement->format('H:i') }}</small> --}}
                                     </td>
                                     <td>
                                         <div class="fw-semibold">{{ $paiement->eleve->nom_complet }}</div>
                                         <small class="text-muted">{{ $paiement->eleve->matricule }}</small>
                                     </td>
-                                    <td>{{ $paiement->eleve->classe->niveau }}</td>
+                                    <td>{{ $paiement->eleve->classe->nom }}</td>
                                     <td class="fw-bold text-success">{{ formater_montant($paiement->montant) }}</td>
                                     <td>
-                                        <span class="badge bg-secondary">{{ $paiement->typePaiement->libelle }}</span>
+                                        {{ $paiement->typePaiement->libelle }}
                                     </td>
                                     <td>
                                         @if($paiement->recu)
@@ -141,6 +172,20 @@
                     </table>
                 </div>
             </div>
+
+            {{-- Pagination --}}
+            @if($paiements->hasPages())
+                <div class="card-footer bg-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-md-end mt-2 mt-md-0">
+                                {{ $paiements->links() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 

@@ -24,8 +24,7 @@ class ClasseRequest extends FormRequest
         return [
             'nom' => 'required|string|max:255',
             'niveau' => 'required|string|max:255',
-            'annee_scolaire_id' => 'required|exists,annee_scolaires,id',
-            'frais_scolaire_id' => 'required|exists,frais_scolaires,id',
+            'frais_scolaire_id' => 'required|exists:frais_scolaires,id',
         ];
     }
 }

@@ -12,17 +12,17 @@
 
         {{-- Info box --}}
         <div class="alert alert-info d-flex align-items-center mb-4">
-            <i class="fas fa-info-circle me-2"></i>
+            <i class="fas fa-info-circle me-2"></i> &nbsp;
             <div>
-                Vous modifiez les frais du niveau <strong>{{ $frais->niveau }}</strong>
+                Vous modifiez les frais du niveau <strong>{{ $fraisScolaire->niveau }}</strong>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
+        <div class="container">
+            <div>
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form action="{{ route('frais-scolaire.update', $frais) }}" method="POST">
+                        <form action="{{ route('frais-scolaire.update', $fraisScolaire) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -34,16 +34,16 @@
                                 </label>
                                 <select name="niveau"
                                         id="niveau"
-                                        class="form-select form-select-lg @error('niveau') is-invalid @enderror"
+                                        class="form-control form-control-lg @error('niveau') is-invalid @enderror"
                                         required>
                                     <option value="">-- Sélectionner un niveau --</option>
-                                    <option value="6ème" {{ old('niveau', $frais->niveau) == '6ème' ? 'selected' : '' }}>6ème</option>
-                                    <option value="5ème" {{ old('niveau', $frais->niveau) == '5ème' ? 'selected' : '' }}>5ème</option>
-                                    <option value="4ème" {{ old('niveau', $frais->niveau) == '4ème' ? 'selected' : '' }}>4ème</option>
-                                    <option value="3ème" {{ old('niveau', $frais->niveau) == '3ème' ? 'selected' : '' }}>3ème</option>
-                                    <option value="2nde" {{ old('niveau', $frais->niveau) == '2nde' ? 'selected' : '' }}>2nde</option>
-                                    <option value="1ère" {{ old('niveau', $frais->niveau) == '1ère' ? 'selected' : '' }}>1ère</option>
-                                    <option value="Tle" {{ old('niveau', $frais->niveau) == 'Tle' ? 'selected' : '' }}>Terminale</option>
+                                    <option value="6ème" {{ old('niveau', $fraisScolaire->niveau) == '6ème' ? 'selected' : '' }}>6ème</option>
+                                    <option value="5ème" {{ old('niveau', $fraisScolaire->niveau) == '5ème' ? 'selected' : '' }}>5ème</option>
+                                    <option value="4ème" {{ old('niveau', $fraisScolaire->niveau) == '4ème' ? 'selected' : '' }}>4ème</option>
+                                    <option value="3ème" {{ old('niveau', $fraisScolaire->niveau) == '3ème' ? 'selected' : '' }}>3ème</option>
+                                    <option value="2nde" {{ old('niveau', $fraisScolaire->niveau) == '2nde' ? 'selected' : '' }}>2nde</option>
+                                    <option value="1ère" {{ old('niveau', $fraisScolaire->niveau) == '1ère' ? 'selected' : '' }}>1ère</option>
+                                    <option value="Tle" {{ old('niveau', $fraisScolaire->niveau) == 'Tle' ? 'selected' : '' }}>Terminale</option>
                                 </select>
                                 <small class="text-muted">Choisissez le niveau scolaire concerné</small>
                                 @error('niveau')
@@ -61,7 +61,7 @@
                                     <input type="number"
                                         name="montant"
                                         id="montant"
-                                        value="{{ old('montant', $frais->montant) }}"
+                                        value="{{ old('montant', $fraisScolaire->montant) }}"
                                         min="0"
                                         step="1000"
                                         class="form-control @error('montant') is-invalid @enderror"
@@ -79,16 +79,16 @@
                             <div class="card border-success mb-4">
                                 <div class="card-body text-center">
                                     <small class="text-muted d-block mb-2">Aperçu du montant</small>
-                                    <h3 class="text-success mb-0" id="preview">{{ formater_montant($frais->montant) }}</h3>
+                                    <h3 class="text-success mb-0" id="preview">{{ formater_montant($fraisScolaire->montant) }}</h3>
                                 </div>
                             </div>
 
                             {{-- Avertissement si utilisé --}}
-                            @if($frais->classes()->count() > 0)
+                            @if($fraisScolaire->classes()->count() > 0)
                                 <div class="alert alert-warning d-flex align-items-start mb-4">
-                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i>
+                                    <i class="fas fa-exclamation-triangle me-2 mt-1"></i> &nbsp;
                                     <div>
-                                        <strong>Attention !</strong> Ces frais sont utilisés par <strong>{{ $frais->classes()->count() }}</strong> classe(s) regroupant <strong>{{ $frais->classes->sum(function($c) { return $c->eleves->count(); }) }}</strong> élève(s). La modification affectera toutes ces classes.
+                                        <strong>Attention !</strong> Ces frais sont utilisés par <strong>{{ $fraisScolaire->classes()->count() }}</strong> classe(s) regroupant <strong>{{ $fraisScolaire->classes->sum(function($c) { return $c->eleves->count(); }) }}</strong> élève(s). La modification affectera toutes ces classes.
                                     </div>
                                 </div>
                             @endif
@@ -100,25 +100,23 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <small class="text-muted d-block">Montant actuel</small>
-                                            <strong class="text-success">{{ formater_montant($frais->montant) }}</strong>
+                                            <strong class="text-success">{{ formater_montant($fraisScolaire->montant) }}</strong>
                                         </div>
                                         <div class="col-6">
                                             <small class="text-muted d-block">Classes</small>
-                                            <strong>{{ $frais->classes()->count() }}</strong>
+                                            <strong>{{ $fraisScolaire->classes()->count() }}</strong>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {{-- Boutons --}}
-                            <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('frais-scolaire.show') }}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Annuler
+                                <a href="{{ route('frais-scolaire.show', $fraisScolaire) }}" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i> &nbsp; Annuler
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Enregistrer les modifications
+                                    <i class="fas fa-save me-1"></i> &nbsp; Enregistrer les modifications
                                 </button>
-                            </div>
                         </form>
                     </div>
                 </div>

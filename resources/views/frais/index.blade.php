@@ -22,9 +22,9 @@
 
         {{-- Description --}}
         <div class="alert alert-info d-flex align-items-start mb-4">
-            <i class="fas fa-info-circle me-2 mt-1"></i>
+            <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
             <div>
-                <strong>À propos :</strong> Les frais scolaires définissent le montant de la scolarité par niveau. Un même niveau peut être attribué à plusieurs classes.
+                <strong>À propos :</strong> Les frais scolaires définissent le montant de la scolarité par niveau. Un même niveau peut être attribué à plusieurs classes. Le bouton "Supprimer" est désactivé parce que les frais de scolarité sont déja appliqué à une classe dans le cas contraire il serait actif .
             </div>
         </div>
 
@@ -76,7 +76,7 @@
         {{-- Grille des frais --}}
         <div class="row g-4">
             @forelse($frais->sortBy('montant') as $fraisScolaire)
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 mb-3">
                     <div class="card shadow-sm h-100 hover-card">
                         <div class="card-header bg-gradient-primary text-white">
                             <div class="d-flex justify-content-between align-items-center">
@@ -126,6 +126,12 @@
                                         {{ $fraisScolaire->classes_count > 0 ? 'disabled' : '' }}>
                                     <i class="fas fa-trash"></i>
                                 </button>
+
+                                <form id="form-suppression-{{ $fraisScolaire->id}}" action="{{ route('frais-scolaire.destroy', $fraisScolaire->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -147,24 +153,6 @@
         </div>
     </div>
 
-    {{-- Modal de confirmation de suppression --}}
-    <form id="delete-form" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
-
-    @push('scripts')
-        <script>
-        function confirmDelete(id, niveau) {
-            if (confirm(`Êtes-vous sûr de vouloir supprimer les frais du niveau "${niveau}" ?\nCette action est irréversible.`)) {
-                const form = document.getElementById('delete-form');
-                form.action = `/frais-scolaire/${id}`;
-                form.submit();
-            }
-        }
-        </script>
-    @endpush
-
     @push('styles')
         <style>
         .hover-card {
@@ -180,3 +168,23 @@
         </style>
     @endpush
 @endsection
+
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: "Cette action est irréversible.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('form-suppression-' + id).submit();
+            }
+        });
+    }
+</script>

@@ -8,12 +8,10 @@
         {{-- En-tête --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="d-flex align-items-center">
-                <a href="{{ route('frais-scolaire.index') }}" class="btn btn-outline-secondary me-3">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
+
                 <div>
-                    <h1 class="h2 mb-0">Frais - {{ $frais->niveau }}</h1>
-                    <p class="text-muted mb-0">{{ formater_montant($frais->montant) }}</p>
+                    <h1 class="h2 mb-0">Frais - {{ $fraisScolaire->niveau }}</h1>
+                    <p class="text-muted mb-0">{{ formater_montant($fraisScolaire->montant) }}</p>
                 </div>
             </div>
             {{-- <div class="d-flex gap-2">
@@ -36,11 +34,11 @@
                     <div class="card-header bg-white">
                         <h5 class="mb-0">
                             <i class="fas fa-school me-2 text-primary"></i>
-                            Classes concernées ({{ $frais->classes->count() }})
+                            Classes concernées ({{ $fraisScolaire->classes->count() }})
                         </h5>
                     </div>
                     <div class="card-body p-0">
-                        @if($frais->classes->count() > 0)
+                        @if($fraisScolaire->classes->count() > 0)
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead class="table-light">
@@ -53,9 +51,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($frais->classes as $classe)
+                                        @foreach($fraisScolaire->classes as $classe)
                                             @php
-                                                $revenuAttendu = $frais->montant * $classe->eleves->count();
+                                                $revenuAttendu = $fraisScolaire->montant * $classe->eleves->count();
                                             @endphp
                                             <tr>
                                                 <td>
@@ -83,12 +81,12 @@
                                         <tr>
                                             <th colspan="2">Total</th>
                                             <th class="text-center">
-                                                {{ $frais->classes->sum(function($c) { return $c->eleves->count(); }) }} élèves
+                                                {{ $fraisScolaire->classes->sum(function($c) { return $c->eleves->count(); }) }} élèves
                                             </th>
                                             <th class="text-end text-success">
                                                 @php
-                                                    $totalRevenu = $frais->classes->sum(function($c) use ($frais) {
-                                                        return $frais->montant * $c->eleves->count();
+                                                    $totalRevenu = $fraisScolaire->classes->sum(function($c) use ($fraisScolaire) {
+                                                        return $fraisScolaire->montant * $c->eleves->count();
                                                     });
                                                 @endphp
                                                 {{ formater_montant($totalRevenu) }}
@@ -117,38 +115,39 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-primary text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-info-circle me-2"></i>Informations
+                            <i class="fas fa-info-circle me-2"></i> &nbsp;
+                            Informations
                         </h6>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
                             <small class="text-muted d-block">Niveau</small>
-                            <strong class="fs-5">{{ $frais->niveau }}</strong>
+                            <strong class="fs-5">{{ $fraisScolaire->niveau }}</strong>
                         </div>
 
                         <div class="mb-3">
                             <small class="text-muted d-block">Montant annuel</small>
-                            <strong class="text-success fs-4">{{ formater_montant($frais->montant) }}</strong>
+                            <strong class="text-success fs-4">{{ formater_montant($fraisScolaire->montant) }}</strong>
                         </div>
 
                         <div class="mb-3">
                             <small class="text-muted d-block">Classes concernées</small>
-                            <strong>{{ $frais->classes->count() }}</strong>
+                            <strong>{{ $fraisScolaire->classes->count() }}</strong>
                         </div>
 
                         <div class="mb-3">
                             <small class="text-muted d-block">Total élèves</small>
-                            <strong>{{ $frais->classes->sum(function($c) { return $c->eleves->count(); }) }}</strong>
+                            <strong>{{ $fraisScolaire->classes->sum(function($c) { return $c->eleves->count(); }) }}</strong>
                         </div>
 
                         <div class="mb-3">
                             <small class="text-muted d-block">Date de création</small>
-                            <strong>{{ $frais->created_at->format('d/m/Y') }}</strong>
+                            <strong>{{ $fraisScolaire->created_at->format('d/m/Y') }}</strong>
                         </div>
 
                         <div>
                             <small class="text-muted d-block">Dernière modification</small>
-                            <strong>{{ $frais->updated_at->format('d/m/Y à H:i') }}</strong>
+                            <strong>{{ $fraisScolaire->updated_at->format('d/m/Y à H:i') }}</strong>
                         </div>
                     </div>
                 </div>
@@ -157,14 +156,14 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-success text-white">
                         <h6 class="mb-0">
-                            <i class="fas fa-chart-pie me-2"></i>Statistiques
+                            <i class="fas fa-chart-pie me-2"></i> &nbsp; Statistiques
                         </h6>
                     </div>
                     <div class="card-body">
                         @php
-                            $totalEleves = $frais->classes->sum(function($c) { return $c->eleves->count(); });
-                            $revenuAttendu = $frais->montant * $totalEleves;
-                            $revenuParClasse = $frais->classes->count() > 0 ? $revenuAttendu / $frais->classes->count() : 0;
+                            $totalEleves = $fraisScolaire->classes->sum(function($c) { return $c->eleves->count(); });
+                            $revenuAttendu = $fraisScolaire->montant * $totalEleves;
+                            $revenuParClasse = $fraisScolaire->classes->count() > 0 ? $revenuAttendu / $fraisScolaire->classes->count() : 0;
                         @endphp
 
                         <div class="mb-3">
@@ -179,16 +178,16 @@
 
                         <div>
                             <small class="text-muted d-block">Élèves par classe (moyenne)</small>
-                            <strong>{{ $frais->classes->count() > 0 ? round($totalEleves / $frais->classes->count(), 1) : 0 }}</strong>
+                            <strong>{{ $fraisScolaire->classes->count() > 0 ? round($totalEleves / $fraisScolaire->classes->count(), 1) : 0 }}</strong>
                         </div>
                     </div>
                 </div>
 
                 {{-- Alerte si utilisé --}}
-                @if($frais->classes->count() > 0)
+                @if($fraisScolaire->classes->count() > 0)
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        <strong>Note :</strong> Ces frais sont utilisés par {{ $frais->classes->count() }} classe(s) et ne peuvent pas être supprimés.
+                        <strong>Note :</strong> Ces frais sont utilisés par {{ $fraisScolaire->classes->count() }} classe(s) et ne peuvent pas être supprimés.
                     </div>
                 @else
                     <div class="alert alert-info">
@@ -216,5 +215,5 @@
             }
         }
         </script>
-    
+
 @endsection

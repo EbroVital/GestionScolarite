@@ -1,4 +1,3 @@
-{{-- resources/views/classes/index.blade.php --}}
 @extends('layouts.template')
 
 @section('title', 'Liste des classes')
@@ -15,11 +14,18 @@
 
         {{-- Messages --}}
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible text-center" role="alert">
                 {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
+
+        {{-- Infos --}}
+        <div class="alert alert-info d-flex align-items-start mb-4">
+            <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
+            <div>
+                <strong>À propos :</strong> Le bouton "Supprimer" est désactivé parce qu'il y a des élèves appartenant à cette classe dans le cas contraire il serait actif .
+            </div>
+        </div>
 
         {{-- Statistiques rapides --}}
         <div class="row g-3 mb-4">
@@ -69,7 +75,7 @@
         {{-- Grille des classes --}}
         <div class="row g-4">
             @forelse($classes as $classe)
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 mb-3">
                     <div class="card shadow-sm h-100 hover-shadow">
                         <div class="card-header bg-primary text-white">
                             <div class="d-flex justify-content-between align-items-center">
@@ -126,11 +132,15 @@
                                 title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="confirmDelete({{ $classe->id }})"
-                                        class="btn btn-sm btn-danger"
-                                        title="Supprimer">
+                                <button onclick="confirmDelete({{ $classe->id }})"class="btn btn-sm btn-danger" title="Supprimer"{{ $classe->eleves_count > 0 ? 'disabled' : '' }}>
                                     <i class="fas fa-trash"></i>
                                 </button>
+
+                                <form id="form-suppression-{{ $classe->id}}" action="{{ route('classe.destroy', $classe->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -152,33 +162,23 @@
         </div>
     </div>
 
-    {{-- Modal de confirmation de suppression --}}
-    <form id="delete-form" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
-
-    {{-- @push('scripts')
-        <script>
-        function confirmDelete(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer cette classe ?\nCette action est irréversible si la classe n\'a pas d\'élèves.')) {
-                const form = document.getElementById('delete-form');
-                form.action = `/classe/${id}`;
-                form.submit();
-            }
-        }
-        </script>
-    @endpush --}}
-
-    @push('styles')
-        <style>
-        .hover-shadow {
-            transition: all 0.3s ease;
-        }
-        .hover-shadow:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-        }
-        </style>
-    @endpush
 @endsection
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: "Cette action est irréversible.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('form-suppression-' + id).submit();
+            }
+        });
+    }
+</script>

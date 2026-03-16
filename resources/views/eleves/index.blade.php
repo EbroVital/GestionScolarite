@@ -15,9 +15,8 @@
 
         {{-- Messages de succès --}}
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success text-center">
                 {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
 
@@ -33,7 +32,7 @@
                                 <option value="">Toutes les classes</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>
-                                        {{ $classe->niveau }}
+                                        {{ $classe->nom }}
                                     </option>
                                 @endforeach
                             </select>
@@ -51,10 +50,11 @@
                         </div>
 
                         {{-- Boutons --}}
-                        <div class="col-md-3 d-flex align-items-end gap-2">
+                        <div class="col-md-3 d-flex align-items-end gap-3">
                             <button type="submit" class="btn btn-primary flex-fill">
-                                {{-- <i class="fas fa-search me-1"></i> --}}Rechercher
-                            </button>
+                                {{-- <i class="fas fa-search me-1"></i> --}}
+                                Rechercher
+                            </button> &nbsp; &nbsp;
                             <a href="{{ route('eleves.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-redo"></i>
                             </a>
@@ -82,29 +82,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($eleves as $eleve)
+                            @forelse($eleves as $elefe)
                                 <tr>
-                                    <td class="fw-bold">{{ $eleve->matricule }}</td>
+                                    <td class="fw-bold">{{ $elefe->matricule }}</td>
                                     <td>
-                                        <div class="fw-semibold">{{ $eleve->NomComplet }}</div>
+                                        <div class="fw-semibold">{{ $elefe->NomComplet }}</div>
                                     </td>
-                                    <td> <small class="text-muted">{{ $eleve->date_naissance->format('d/m/Y') }}</small> </td>
-                                    <td>{{ $eleve->classe->nom ?? 'Non définie' }}</td>
+                                    <td> <small class="text-muted">{{ $elefe->date_naissance->format('d/m/Y') }}</small> </td>
+                                    <td>{{ $elefe->classe->nom ?? 'Non définie' }}</td>
                                     <td>
-                                        <span class="text-white badge {{ $eleve->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
-                                            {{ $eleve->sexe == 'M' ? 'Masculin' : 'Féminin' }}
+                                        <span class="text-white badge {{ $elefe->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
+                                            {{ $elefe->sexe == 'M' ? 'Masculin' : 'Féminin' }}
                                         </span>
                                     </td>
-                                    <td>{{ $eleve->adresse }}</td>
-                                    <td>{{ $eleve->telephone_parent }}</td>
+                                    <td>{{ $elefe->adresse }}</td>
+                                    <td>{{ $elefe->telephone_parent }}</td>
                                     <td class="text-center">
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <a href="{{ route('eleves.show', $eleve) }}"
+                                            <a href="{{ route('eleves.show', $elefe) }}"
                                             class="btn btn-info"
                                             title="Voir">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('eleves.edit', $eleve) }}"
+                                            <a href="{{ route('eleves.edit', $elefe) }}"
                                             class="btn btn-warning"
                                             title="Modifier">
                                                 <i class="fas fa-edit"></i>
@@ -132,12 +132,13 @@
 
             {{-- Pagination --}}
             @if($eleves->hasPages())
-                <div class="card-footer">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="text-muted small">
-                            Affichage de {{ $eleves->firstItem() }} à {{ $eleves->lastItem() }} sur {{ $eleves->total() }} élèves
+                <div class="card-footer bg-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-md-end mt-2 mt-md-0">
+                                {{ $eleves->links() }}
+                            </div>
                         </div>
-                        {{ $eleves->links() }}
                     </div>
                 </div>
             @endif

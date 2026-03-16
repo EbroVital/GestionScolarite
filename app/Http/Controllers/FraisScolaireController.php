@@ -48,24 +48,25 @@ class FraisScolaireController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(fraisScolaire $frais)
+    public function show(fraisScolaire $fraisScolaire)
     {
-        $frais->load('classes.eleves');
-        return view('frais.show', compact('frais'));
+        $fraisScolaire->load('classes.eleves');
+        // dd($fraisScolaire);
+        return view('frais.show', compact('fraisScolaire'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(fraisScolaire $frais)
+    public function edit(fraisScolaire $fraisScolaire)
     {
-        return view('frais.edit', compact('frais'));
+        return view('frais.edit', compact('fraisScolaire'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, fraisScolaire $frais)
+    public function update(Request $request, fraisScolaire $fraisScolaire)
     {
         $validated = $request->validate([
             'niveau' => 'required|string|max:255',
@@ -77,7 +78,7 @@ class FraisScolaireController extends Controller
             'montant.min' => 'Le montant doit être positif',
         ]);
 
-        $frais->update($validated);
+        $fraisScolaire->update($validated);
 
         return redirect()->route('frais-scolaire.index')->with('message', 'Mise à jour éffectuée');
     }
@@ -88,10 +89,9 @@ class FraisScolaireController extends Controller
     public function destroy(fraisScolaire $frais)
     {
         // Vérifier si le frais est utilisé par des classes
-        $count = $frais->classes()->count();
 
-        if ($count > 0) {
-            return redirect()->route('frais-scolaire.index')->with('message', "Impossible de supprimer ce frais car il est utilisé par {$count} classe(s)");
+        if ($frais->classes()->count() > 0) {
+            return redirect()->route('frais-scolaire.index')->with('message', "Impossible de supprimer ce frais car il est utilisé par '{$frais}' classe(s)");
         }
 
         $niveau = $frais->niveau;

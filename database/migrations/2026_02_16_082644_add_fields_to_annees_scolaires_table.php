@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('annee_scolaires', function (Blueprint $table) {
-            $table->date('date_debut')->nullable()->after('libelle');
-            $table->date('date_fin')->nullable()->after('date_debut');
-            $table->boolean('est_active')->default(false)->after('date_fin');
+            $table->boolean('est_active')->default(false)->after('libelle');
         });
     }
 
@@ -24,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('annee_scolaires', function (Blueprint $table) {
-            $table->dropColumn('date_debut', 'date_fin', 'est_active');
+            $table->dropColumn('est_active');
         });
     }
 };
