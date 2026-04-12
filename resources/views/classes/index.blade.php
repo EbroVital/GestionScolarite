@@ -23,7 +23,7 @@
         <div class="alert alert-info d-flex align-items-start mb-4">
             <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
             <div>
-                <strong>À propos :</strong> Le bouton "Supprimer" est désactivé parce qu'il y a des élèves appartenant à cette classe dans le cas contraire il serait actif .
+                <strong>À propos :</strong> Le bouton "Supprimer" est désactivé parce qu'il y a des élèves appartenant à cette classe dans le cas contraire il serait actif pour pouvoir supprimer la classe voulue .
             </div>
         </div>
 

@@ -308,7 +308,7 @@
                 <div class="progress-fill" style="width: {{ min($pourcentage, 100) }}%"></div>
             </div>
             <div style="text-align: center; font-size: 10px; color: #6c757d;">
-                {{ number_format($pourcentage, 1) }}% payé
+                {{ number_format($pourcentage) }}% payé
             </div>
         </div>
 

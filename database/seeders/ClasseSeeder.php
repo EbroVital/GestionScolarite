@@ -15,7 +15,7 @@ class ClasseSeeder extends Seeder
      */
     public function run(): void
     {
-        $anneeScolaire = anneeScolaire::where('libelle', '2024-2025')->first();
+        $anneeScolaire = anneeScolaire::where('libelle', '2025-2026')->first();
 
         $classes = [
             ['nom' => '6ème A', 'niveau' => '6ème'],

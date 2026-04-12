@@ -14,16 +14,9 @@
                     <p class="text-muted mb-0">{{ formater_montant($fraisScolaire->montant) }}</p>
                 </div>
             </div>
-            {{-- <div class="d-flex gap-2">
-                <a href="{{ route('frais-scolaire.edit', $frais) }}" class="btn btn-warning">
-                    <i class="fas fa-edit me-1"></i>Modifier
-                </a>
-                @if($frais->classes->count() === 0)
-                    <button onclick="confirmDelete({{ $frais->id }}, '{{ $frais->niveau }}')" class="btn btn-danger">
-                        <i class="fas fa-trash me-1"></i>Supprimer
-                    </button>
-                @endif
-            </div> --}}
+            <div class="d-flex gap-2">
+                <a href="{{ route('frais-scolaire.index') }}" class="btn btn-primary"> Retour </a>
+            </div>
         </div>
 
         <div class="row g-4">

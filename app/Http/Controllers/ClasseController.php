@@ -7,6 +7,7 @@ use App\Models\anneeScolaire;
 use App\Models\Classe;
 use App\Models\fraisScolaire;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 
 class ClasseController extends Controller
 {
@@ -25,7 +26,7 @@ class ClasseController extends Controller
     public function create()
     {
         $frais = fraisScolaire::all();
-        return view('classes.create', compact('frais', 'classeId'));
+        return view('classes.create', compact('frais'));
     }
 
     /**
@@ -33,16 +34,21 @@ class ClasseController extends Controller
      */
     public function store(ClasseRequest $request)
     {
+        $anneeScolaire = anneeScolaire::where("libelle", annee_scolaire_actuelle())->where('est_active', true)->first();
 
-        $anneeScolaire = anneeScolaire::firstOrCreate([
-            'libelle' => annee_scolaire_actuelle(),
-            'est_active' => true
-        ]);
+        if(!$anneeScolaire){
 
-        $info = $request->validated();
-        $info['annee_scolaire_id'] = $anneeScolaire->id;
+            $anneeScolaire = anneeScolaire::firstOrCreate([
+                'libelle' => annee_scolaire_actuelle(),
+                'est_active' => true
+            ]);
 
-        Classe::create($info);
+        }
+
+            $info = $request->validated();
+            $info['annee_scolaire_id'] = $anneeScolaire->id;
+
+            Classe::create($info);
 
         return redirect()->route('classe.index')->with('message', 'Classe enregistrée');
     }

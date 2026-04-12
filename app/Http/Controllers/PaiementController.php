@@ -49,8 +49,9 @@ class PaiementController extends Controller
 
         $total = Paiement::sum('montant');
         $today = Paiement::whereDate('date_paiement', today())->sum('montant');
+        $todayP = Paiement::whereDate('date_paiement', today())->count();
 
-        return view('paiements.index', compact('paiements', 'total', 'today'));
+        return view('paiements.index', compact('paiements', 'total', 'today', 'todayP'));
 
     }
 

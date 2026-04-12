@@ -16,7 +16,7 @@
             <div class="d-flex">
                 <a href="{{ route('type-paiement.edit', $type_paiement) }}" class="btn btn-warning">
                     <i class="fas fa-edit me-1"></i> &nbsp; Modifier
-                </a>
+                </a> &nbsp; &nbsp;
                 <a class="btn btn-primary" href="{{ route('type-paiement.index') }}">
                     Retour
                 </a>

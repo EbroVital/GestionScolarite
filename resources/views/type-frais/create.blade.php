@@ -65,7 +65,7 @@
 
                             {{-- Info --}}
                             <div class="alert alert-info d-flex align-items-start mb-4">
-                                <i class="fas fa-info-circle me-2 mt-1"></i>
+                                <i class="fas fa-info-circle me-2 mt-1"></i> &nbsp;
                                 <div class="small">
                                     Le type de paiement vous permet de suivre les différents modes de règlement utilisés par les parents d'élèves.
                                 </div>

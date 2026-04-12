@@ -242,9 +242,9 @@
                 const eleveSelect = document.getElementById('eleve_id');
 
                 if (!classeId) {
-                    eleveSelect.disabled = true;
-                    eleveSelect.innerHTML = '<option value="">-- Sélectionner un élève --</option>';
-                    return;
+                    // eleveSelect.disabled = true;
+                    eleveSelect.innerHTML = '<option value="">-- Aucun élève trouvé dans cette classe --</option>';
+                    // return;
                 }
 
                 // Recharger la page avec la classe sélectionnée

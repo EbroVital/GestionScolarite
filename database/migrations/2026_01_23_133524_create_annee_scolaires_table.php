@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('annee_scolaires', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
+            $table->boolean('est_active')->default(false);
             $table->timestamps();
         });
     }

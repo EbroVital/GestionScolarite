@@ -56,7 +56,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="text-white-50 mb-1">Total du jour</h6>
+                                <h6 class="text-white-50 mb-1">Total du jour ({{ $todayP }}) </h6>
                                 <h3 class="mb-0">{{ formater_montant($today)  }}</h3>
                             </div>
                             {{-- <i class="fas fa-calendar-day fa-3x opacity-50"></i> --}}

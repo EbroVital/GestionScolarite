@@ -11,11 +11,11 @@
             </div>
             <div class="d-flex gap-2">
                 <a href="{{ route('eleves.edit', $elefe) }}" class="btn btn-warning">
-                    <i class="fas fa-edit me-1"></i> Modifier
+                    <i class="fas fa-edit me-1"></i> Modifier les informations de l'élève
                 </a>
-                {{-- <button onclick="window.print()" class="btn btn-secondary">
-                    <i class="fas fa-print me-1"></i> Imprimer
-                </button> --}}
+                &nbsp; &nbsp;
+                <a href="{{ route('eleves.index', $elefe) }}" class="btn btn-primary">Retour  </a>
+
             </div>
         </div>
 
@@ -178,7 +178,7 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between small mb-1">
                                 <span class="text-muted">Progression</span>
-                                <strong>{{ number_format($pourcentage, 0) }}%</strong>
+                                <strong>{{ number_format($pourcentage) }}%</strong>
                             </div>
                             <div class="progress" style="height: 10px;">
                                 <div class="progress-bar bg-success"

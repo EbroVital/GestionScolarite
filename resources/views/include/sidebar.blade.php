@@ -13,12 +13,12 @@
       </li>
       <hr class="sidebar-divider">
 
-     
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
-          {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
+          <i class="fas fa-users fa-2x"></i>
           <span>Les élèves</span>
         </a>
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
@@ -32,7 +32,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
-          {{-- <i class="fab fa-fw fa-wpforms"></i> --}}
+          <i class="fas fa-money-bill-wave fa-3x opacity-50"></i>
           <span>Paiements</span>
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
@@ -46,7 +46,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
-          {{-- <i class="fas fa-fw fa-table"></i> --}}
+          <i class="fas fa-school fa-3x opacity-50"></i>
           <span>Classes</span>
         </a>
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
@@ -61,7 +61,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
           aria-controls="collapsePage">
-          {{-- <i class="fas fa-fw fa-columns"></i> --}}
+           <i class="fas fa-money-bill-wave fa-3x opacity-50"></i>
           <span>Frais scolaires</span>
         </a>
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
@@ -75,7 +75,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePag" aria-expanded="true"
           aria-controls="collapsePag">
-          {{-- <i class="fas fa-fw fa-columns"></i> --}}
+          <i class="fas fa-tag me-2"></i>
           <span>Type de frais scolaire</span>
         </a>
         <div id="collapsePag" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">

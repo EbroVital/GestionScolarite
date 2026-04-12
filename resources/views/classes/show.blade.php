@@ -64,7 +64,7 @@
                                                     <small class="text-muted">{{ $eleve->date_naissance->format('d/m/Y') }}</small>
                                                 </td>
                                                 <td>
-                                                    <span class="badge {{ $eleve->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
+                                                    <span class="badge text-white {{ $eleve->sexe == 'M' ? 'bg-primary' : 'bg-danger' }}">
                                                         {{ $eleve->sexe == 'M' ? 'M' : 'F' }}
                                                     </span>
                                                 </td>
